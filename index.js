@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 80;
+const port = 3000;
 app.use(express.json());
 
 function isNumeric(inputString) {
@@ -32,8 +32,17 @@ app.post("/bfhl", (req, res) => {
         }
     });
     let alpha = data.alphabets
+    let maxalphabet = ""
+    let val = 0
+    alpha.forEach((ele) => {
+        const asciival = ele.toLowerCase().charCodeAt(0)
+        if(asciival > val){
+            maxalphabet = ele
+            val = asciival
+        }
+    }) 
     alpha.sort()
-    data.highest_alphabet.push(alpha[alpha.length -1])
+    data.highest_alphabet.push(maxalphabet)
   }
 
   console.log(body);
